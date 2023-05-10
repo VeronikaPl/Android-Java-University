@@ -2,10 +2,11 @@ package com.mobile.pharmacy;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.os.Bundle;
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.Toast;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,18 +15,21 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        String[] strArray = new String[250];
-        for (int i = 0; i < strArray.length; i++) {
-            strArray[i] = "Number №" + (i + 1);
-        }
+        Button button = (Button) findViewById(R.id.button);
 
-        ListView listView = ((ListView) findViewById(R.id.listView));
+        ObjectAnimator anx = ObjectAnimator.ofFloat(button, "translationX", 100f);
+        anx.setDuration(1000);
+        ObjectAnimator any = ObjectAnimator.ofFloat(button, "translationY", 100f);
+        any.setDuration(1000);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, strArray);
-        listView.setAdapter(adapter);
-        listView.setOnItemClickListener((arg0, v, arg2, arg3) -> {
-            String itemStr = adapter.getItem(arg2);
-            Toast.makeText(getApplicationContext(), itemStr, Toast.LENGTH_SHORT).show();
-        });
+        AnimatorSet bouncer = new AnimatorSet();
+        bouncer.play(any).before(anx);
+
+        ValueAnimator fadeAnim = ValueAnimator.ofFloat(1f, 0f);
+        fadeAnim.setDuration(250);
+
+        AnimatorSet an_set = new AnimatorSet();
+        an_set.play(bouncer).before(fadeAnim);
+        an_set.start();
     }
 }
