@@ -1,11 +1,5 @@
 <resources>
-    <string name="app_name">Pharmacy</string>
-    
-    <string-array name="items">
-        <item>Item1</item>
-        <item>Item2</item>
-        <item>Item3</item>
-        <item>Item4</item>
-        <item>Item5</item>
-    </string-array>
+    <string name="app_name">Laboratorna #7</string>
+    <string name="menuitem_erase">Білий колір</string>
+    <string name="painting_saved">Збережено</string>
 </resources>
